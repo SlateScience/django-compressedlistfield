@@ -1,0 +1,7 @@
+[run]
+source = compressedlistfield
+omit = compressedlistfield/tests.py
+branch = 1
+
+[report]
+omit = compressedlistfield/tests.py
