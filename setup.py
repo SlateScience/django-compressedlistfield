@@ -15,16 +15,22 @@ class TestCommand(Command):
         pass
 
     def run(self):
-        from django.conf import settings
-        settings.configure(
-            DATABASES={'default': {'NAME': ':memory:', 'ENGINE': 'django.db.backends.sqlite3'}},
-            INSTALLED_APPS=('compressedlistfield', 'django.contrib.contenttypes')
-        )
-        from django.core.management import call_command
         import django
+        from django.core.management import call_command
+        from django.conf import settings
 
-        if django.VERSION[:2] >= (1, 7):
-            django.setup()
+        settings.configure(
+            DATABASES={'default': {
+                'NAME': ':memory:',
+                'ENGINE': 'django.db.backends.sqlite3'
+            }},
+            INSTALLED_APPS=(
+                'django.contrib.contenttypes',
+                'compressedlistfield.test_app.apps.TestConfig',
+            )
+        )
+
+        django.setup()
         call_command('test', 'compressedlistfield')
 
 
