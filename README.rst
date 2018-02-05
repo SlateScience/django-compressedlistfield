@@ -30,6 +30,11 @@ Usage
     class Achievment(models.Model):
       scores = CompressedListField()
 
+
+`scores` is of type `AutoGrowingList` whose base is list and where  empty
+entries are represented by the lists `empty` property.
+
+
 Other Classes
 -------------
 

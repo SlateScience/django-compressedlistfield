@@ -2,6 +2,7 @@ import array
 import bz2
 
 from django.db import models
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -42,12 +43,12 @@ class CompressedListField(models.BinaryField):
 
     def __init__(self, *args, **kwargs):
         kwargs['editable'] = False
+        if 'null' in kwargs and not kwargs['null']:
+            raise ImproperlyConfigured
         kwargs['null'] = True
         if 'type_code' in kwargs:
             self.type_code = str(kwargs['type_code'])
             del kwargs['type_code']
-        if 'default' in kwargs:
-            kwargs['default'] = AutoGrowingList(kwargs['default'])
         super(CompressedListField, self).__init__(*args, **kwargs)
 
     def deconstruct(self):
