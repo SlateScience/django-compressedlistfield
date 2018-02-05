@@ -26,9 +26,9 @@ class TestCompressedListField(TestCase):
         obj.cl[1000] = 4
         obj.save()
         new_obj = self.demo_model.objects.get(id=obj.id)
-        self.assertEqual(new_obj.cl[1], [1])
-        self.assertEqual(new_obj.cl[2], [2])
-        self.assertEqual(new_obj.cl[3], [3])
+        self.assertEqual(new_obj.cl[1], 1)
+        self.assertEqual(new_obj.cl[2], 2)
+        self.assertEqual(new_obj.cl[3], 3)
         for i in new_obj.cl[4:-1]:
             self.assertEqual(i, AutoGrowingList.EMPTY)
 
