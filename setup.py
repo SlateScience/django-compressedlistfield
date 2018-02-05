@@ -15,16 +15,22 @@ class TestCommand(Command):
         pass
 
     def run(self):
-        from django.conf import settings
-        settings.configure(
-            DATABASES={'default': {'NAME': ':memory:', 'ENGINE': 'django.db.backends.sqlite3'}},
-            INSTALLED_APPS=('compressedlistfield', 'django.contrib.contenttypes')
-        )
-        from django.core.management import call_command
         import django
+        from django.core.management import call_command
+        from django.conf import settings
 
-        if django.VERSION[:2] >= (1, 7):
-            django.setup()
+        settings.configure(
+            DATABASES={'default': {
+                'NAME': ':memory:',
+                'ENGINE': 'django.db.backends.sqlite3'
+            }},
+            INSTALLED_APPS=(
+                'django.contrib.contenttypes',
+                'compressedlistfield.test_app.apps.TestConfig',
+            )
+        )
+
+        django.setup()
         call_command('test', 'compressedlistfield')
 
 
@@ -36,26 +42,31 @@ setup(
     version='0.1',
     packages=['compressedlistfield'],
     include_package_data=True,
-    license='BSD License',  # example license
-    description='A Django app that prvides a compressed list field',
+    license='BSD License',
+    description='A Django compressed list model field',
     long_description=README,
-    url='https://github.com/SlateScience',
-    author='BennyDaon',
-    author_email='yourname@example.com',
+    url='https://github.com/SlateScience/django-compressedlistfield',
+    author='Benny Daon',
+    author_email='benny@slatescience.com',
     install_requires=['Django >= 1.8.0'],
     tests_require=['Django >= 1.8.0'],
     cmdclass={'test': TestCommand},
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
+        'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        # Replace these appropriately if you are stuck on Python 2.
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
