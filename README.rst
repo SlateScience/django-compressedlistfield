@@ -2,19 +2,19 @@
 django-compressedlistfield
 ==========================
 
-django-compressedlistfield is a reusable Django field that stores a compressed,
-auto growing, list of integers in your models.
+django-compressedlistfield provides a Django model field which stores
+a compressed, auto growing, list of integers.
 
-It uses bz2 for compresing the list, but you don't have to worry about it as it
-silently takes care of serialization. To use, simply add the field to one of
-your models.
+It uses bz2 for compresing the list, but you don't have to worry about
+it as it transparently takes care of serialization. To use, simply add the
+field to one of your models.
 
 Python 3 & Django 1.8 through 1.11 supported!
 
 Installation
 ------------
 
-.. code-block:: python
+.. code-block:: shell
 
     pip install django-compressedlistfield
 
@@ -27,7 +27,7 @@ Usage
     from django.db import models
     from compressedlistfield import CompressedListField
 
-    class Achievment(models.Model):
+    class Achievement(models.Model):
       scores = CompressedListField()
 
 
@@ -53,9 +53,8 @@ maintained by the main Django project. See `Django supported versions`_,
 currently:
 
   * Django 1.8 (LTS) with Python 2.7, 3.3, 3.4, or 3.5
-  * Django 1.9 with Python 2.7, 3.4, or 3.5
-  * Django 1.10 with Python 2.7, 3.4, or 3.5
   * Django 1.11 (LTS) with Python 2.7, 3.4, 3.5 or 3.6
+  * Django 2.0 with Python 3.4, 3.5 and 3.6
 
 .. _Django supported versions: https://www.djangoproject.com/download/#supported-versions
 
@@ -69,11 +68,11 @@ To test against all supported versions of Django:
 
     $ docker-compose build && docker-compose up
 
-Or just one version (for example Django 1.10 on Python 3.5):
+Or just one version (for example Django 1.11 on Python 3.5):
 
 .. code-block:: shell
 
-    $ docker-compose build && docker-compose run tox tox -e py35-1.10
+    $ docker-compose build && docker-compose run tox tox -e py35-1.11
 
 Or, you can create a virtualenv, install the django you want to test and run:
 

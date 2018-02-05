@@ -1,13 +1,7 @@
-from django.db import models
 from django.test import TestCase
 
-from .fields import CompressedListField, AutoGrowingList
-
-
-class DemoModel(models.Model):
-    cl = CompressedListField()
-    cl_char = CompressedListField(type_code='c')
-    cl_default = CompressedListField(default=[9, AutoGrowingList.EMPTY, 8])
+from compressedlistfield import AutoGrowingList
+from .models import DemoModel
 
 
 class TestCompressedListField(TestCase):
