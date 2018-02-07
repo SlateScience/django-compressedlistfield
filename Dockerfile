@@ -1,3 +1,3 @@
 FROM themattrix/tox
 
-MAINTAINER Dan Koch <dmkoch@gmail.com>
+MAINTAINER Benny Daon <benny@tuzig.com>
